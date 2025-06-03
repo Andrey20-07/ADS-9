@@ -14,22 +14,22 @@ std::vector<std::vector<char>> PMTree::getAllPerms() {
   return peres;
 }
 
-std::string getPerm1(PMTree& PMtree, int erin) {
+std::vector<char> getPerm1(PMTree& PMtree, int erin) {
   std::vector<std::vector<char>> allPerms = PMtree.getAllPerms();
   if (erin > 0 && erin <= allPerms.size()) {
-    return std::string(allPerms[erin - 1].begin(), allPerms[erin - 1].end());
+    return allPerms[erin - 1];
   }
-  return "";
+  return {};
 }
 
-std::string getPerm2(PMTree& PMtree, int erin) {
+std::vector<char> getPerm2(PMTree& PMtree, int erin) {
   int totalPerms = 1;
   int elementsCount = PMtree.root_node->child_node.size();
   for (int i = 1; i <= elementsCount; ++i) {
     totalPerms *= i;
   }
   if (erin < 1 || erin > totalPerms) {
-    return "";
+    return {};
   }
   std::vector<int> factorials;
   int fact = 1;
@@ -37,7 +37,7 @@ std::string getPerm2(PMTree& PMtree, int erin) {
     fact *= i;
     factorials.push_back(fact);
   }
-  std::string result;
+  std::vector<char> result;
   PMNode* current_node = PMtree.root_node;
   erin--;
   while (true) {
@@ -48,9 +48,9 @@ std::string getPerm2(PMTree& PMtree, int erin) {
     int fact = (numChild == 1) ? 1 : factorials[numChild - 2];
     int index = erin / fact;
     if (index >= numChild) {
-      return "";
+      return {};
     }
-    result += current_node->child_node[index]->symbol;
+    result.push_back(current_node->child_node[index]->symbol);
     erin %= fact;
     current_node = current_node->child_node[index];
   }
