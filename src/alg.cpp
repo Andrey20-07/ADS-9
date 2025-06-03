@@ -4,6 +4,7 @@
 #include  <locale>
 #include  <cstdlib>
 #include  <string>
+#include  <vector>
 #include  "tree.h"
 
 std::vector<std::vector<char>> PMTree::getAllPerms() {
