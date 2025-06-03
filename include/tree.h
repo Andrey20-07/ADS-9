@@ -51,7 +51,7 @@ class PMTree {
     }
     delete node;
   }
-  void collectPerms(PMNode* node, std::vector<char>& current, 
+  void collectPerms(PMNode* node, std::vector<char>& current,
     std::vector<std::vector<char>>& permutations) {
     if (node == nullptr) {
       return;
