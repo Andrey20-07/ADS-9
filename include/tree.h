@@ -8,13 +8,13 @@ class PMNode {
  public:
   char symbol;
   std::vector<PMNode*> child_node;
-  PMNode(char sym) : symbol(sym) {}
+  explicit PMNode(char sym) : symbol(sym) {}
 };
 
 class PMTree {
  public:
   PMNode* root_node;
-  PMTree(const std::vector<char>& mass_elements) {
+  explicit PMTree(const std::vector<char>& mass_elements) {
     root_node = buildTree(mass_elements);
   }
   ~PMTree() {
@@ -23,6 +23,7 @@ class PMTree {
   std::vector<std::vector<char>> getAllPerms();
   std::string getPerm1(int);
   std::string getPerm2(int);
+
  private:
   PMNode* buildTree(const std::vector<char>& remainingElements) {
     PMNode* node = new PMNode('\0');
@@ -50,7 +51,8 @@ class PMTree {
     }
     delete node;
   }
-  void collectPerms(PMNode* node, std::vector<char>& current, std::vector<std::vector<char>>& permutations) {
+  void collectPerms(PMNode* node, std::vector<char>& current, 
+    std::vector<std::vector<char>>& permutations) {
     if (node == nullptr) {
       return;
     }
