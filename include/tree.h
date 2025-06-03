@@ -21,8 +21,6 @@ class PMTree {
     deleteTree(root_node);
   }
   std::vector<std::vector<char>> getAllPerms();
-  std::string getPerm1(int);
-  std::string getPerm2(int);
 
  private:
   PMNode* buildTree(const std::vector<char>& remainingElements) {
@@ -67,4 +65,7 @@ class PMTree {
     current.pop_back();
   }
 };
+
+  std::string getPerm1(PMTree&, int);
+  std::string getPerm2(PMTree&, int);
 #endif  // INCLUDE_TREE_H_
