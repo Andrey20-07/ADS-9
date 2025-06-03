@@ -66,6 +66,6 @@ class PMTree {
   }
 };
 
-  std::string getPerm1(PMTree&, int);
-  std::string getPerm2(PMTree&, int);
+  std::vector<char> getPerm1(PMTree&, int);
+  std::vector<char> getPerm2(PMTree&, int);
 #endif  // INCLUDE_TREE_H_
