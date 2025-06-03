@@ -34,12 +34,14 @@ class PMTree {
       }
       PMNode* child = new PMNode(remainingElements[i]);
       if (!newRemaining.empty()) {
-        child->child_node = buildTree(newRemaining)->child_node;
+        PMNode* subtree = buildTree(newRemaining);
+        child->child_node = subtree->child_node;
+        delete subtree;
       }
       node->child_node.push_back(child);
     }
-    return node;
-  }
+  return node;
+}
   void deleteTree(PMNode* node) {
     if (node == 0) {
       return;
