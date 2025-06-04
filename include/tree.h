@@ -56,7 +56,9 @@ class PMTree {
     if (node == nullptr) {
       return;
     }
-    current.push_back(node->symbol);
+    if (node->symbol != '\0') {
+      current.push_back(node->symbol);
+    }
     if (node->child_node.empty()) {
       permutations.push_back(current);
     } else {
@@ -64,7 +66,9 @@ class PMTree {
         collectPerms(child, current, permutations);
       }
     }
-    current.pop_back();
+    if (node->symbol != '\0') {
+      current.pop_back();
+    }
   }
 };
 
