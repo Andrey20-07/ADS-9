@@ -53,19 +53,19 @@ int main() {
       auto perms = tree.getAllPerms();
       });
     timesAll.push_back(time_all);
-    std::cout << "getAllPerms: " << std::fixed 
+    std::cout << "getAllPerms: " << std::fixed
       << std::setprecision(4) << time_all << " ms\n";
     double time1 = measureTime([&]() {
       auto perm = getPerm1(tree, random_perm);
       });
     times1.push_back(time1);
-    std::cout << "getPerm1: " << std::fixed 
+    std::cout << "getPerm1: " << std::fixed
       << std::setprecision(4) << time1 << " ms\n";
     double time2 = measureTime([&]() {
       auto perm = getPerm2(tree, random_perm);
       });
     times2.push_back(time2);
-    std::cout << "getPerm2: " << std::fixed 
+    std::cout << "getPerm2: " << std::fixed
       << std::setprecision(4) << time2 << " ms\n";
   }
   printResults(test_sizes, timesAll, times1, times2);
