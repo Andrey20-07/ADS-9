@@ -1,10 +1,9 @@
 // Copyright 2022 NNTU-CS
+#include  <iostream>
+#include  <vector>
+#include  <chrono>
+#include  <iomanip>
 #include "tree.h"
-#include <iostream>
-#include <vector>
-#include <chrono>
-#include <iomanip>
-
 
 std::vector<char> generateAlphabet(int n) {
   std::vector<char> mass_alphabet;
@@ -38,7 +37,7 @@ void printResults(const std::vector<int>& sizes,
 }
 
 int main() {
-  std::vector<int> test_sizes = { 3, 4, 5, 6, 7, 8 ,9 ,10};
+  std::vector<int> test_sizes = { 3, 4, 5, 6, 7, 8, 9, 10};
   std::vector<double> timesAll, times1, times2;
   for (int n : test_sizes) {
     std::cout << "\nTest per n = " << n << "\n";
@@ -48,23 +47,26 @@ int main() {
     for (int i = 1; i <= n; ++i) {
       total_perms *= i;
     }
-    srand(static_cast<unsigned int>(time(0)));
-    int random_perm = rand() % total_perms + 1;
+    unsigned int seed = static_cast<unsigned int>(time(0));
+    int random_perm = rand_r(&seed) % total_perms + 1;
     double time_all = measureTime([&]() {
       auto perms = tree.getAllPerms();
       });
     timesAll.push_back(time_all);
-    std::cout << "getAllPerms: " << std::fixed << std::setprecision(4) << time_all << " ms\n";
+    std::cout << "getAllPerms: " << std::fixed 
+      << std::setprecision(4) << time_all << " ms\n";
     double time1 = measureTime([&]() {
       auto perm = getPerm1(tree, random_perm);
       });
     times1.push_back(time1);
-    std::cout << "getPerm1: " << std::fixed << std::setprecision(4) << time1 << " ms\n";
+    std::cout << "getPerm1: " << std::fixed 
+      << std::setprecision(4) << time1 << " ms\n";
     double time2 = measureTime([&]() {
       auto perm = getPerm2(tree, random_perm);
       });
     times2.push_back(time2);
-    std::cout << "getPerm2: " << std::fixed << std::setprecision(4) << time2 << " ms\n";
+    std::cout << "getPerm2: " << std::fixed 
+      << std::setprecision(4) << time2 << " ms\n";
   }
   printResults(test_sizes, timesAll, times1, times2);
   return 0;
